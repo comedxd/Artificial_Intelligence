@@ -1,4 +1,3 @@
-
 import queue as Q
 def uniform_cost_search(graph, start, end):
     if start not in graph:
@@ -11,19 +10,17 @@ def uniform_cost_search(graph, start, end):
     queue.put((0, [start]))
     while not queue.empty():
         node = queue.get()
-        current = node[1][len(node[1]) - 1] # name of node
+        current = node[1][len(node[1]) - 1]
 
-        if end in node[1]:  # if destination node found
+        if end in node[1]:
             print("Path found: " + str(node[1]) + ", Cost = " + str(node[0]))
             break
 
         cost = node[0]
         for neighbor in graph[current]:
-            temp = node[1][:]   # get the current node
+            temp = node[1][:]
             temp.append(neighbor)
-            cost=cost + graph[current][neighbor] # total cost from 'temp' to 'neighbour'
-            queue.put((cost, temp))
-            print(current + "-" + neighbor,cost)
+            queue.put((cost + graph[current][neighbor], temp))
 
 
 def readGraph():
@@ -33,8 +30,6 @@ def readGraph():
 
     for line in range(lines):
         line=input_file.readline().split('\n')[0]
-        #line = input()
-
         tokens = line.split()
         node = tokens[0]
         graph[node] = {}
